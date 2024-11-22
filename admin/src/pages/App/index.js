@@ -6,8 +6,8 @@
  */
 
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { NotFound } from '@strapi/helper-plugin';
+import { Routes, Route } from 'react-router-dom';
+import { EmptyStateLayout } from '@strapi/design-system';
 import pluginId from '../../pluginId';
 import HomePage from '../HomePage';
 import styled from "styled-components";
@@ -16,10 +16,10 @@ import styled from "styled-components";
 const App = () => {
   return (
     <Page>
-      <Switch>
+      <Routes>
         <Route path={`/plugins/${pluginId}`} component={HomePage} exact />
-        <Route component={NotFound} />
-      </Switch>
+        <Route component={EmptyStateLayout} />
+      </Routes>
     </Page>
   );
 };

@@ -1,6 +1,6 @@
 {
   "name": "custom-slug",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "description": "Auto Generated rewritable Slug field (same for different locales).",
   "strapi": {
     "name": "slug",
@@ -14,14 +14,16 @@
   },
   "devDependencies": {},
   "peerDependencies": {
-    "@strapi/strapi": "^4.6.1"
+    "@strapi/strapi": "^5.0.0",
+    "@strapi/design-system": "^1.19.0",
+    "@strapi/icons": "^1.19.0"
   },
   "author": "Anastasiia Berest <anastasiiaberest@gmail.com> (XFR | xforeal)",
   "maintainers": [
     "Anastasiia Berest (XFR | xforeal) and Chat GPT"
   ],
   "engines": {
-    "node": ">=14.19.1 <=18.x.x",
+    "node": ">=14.19.1 <=20.x.x",
     "npm": ">=6.0.0"
   },
   "license": "MIT",

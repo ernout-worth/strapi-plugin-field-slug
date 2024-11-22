@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import {
-  useCMEditViewDataManager
-} from "@strapi/helper-plugin";
+  unstable_useContentManagerContext as useContentManagerContext
+} from '@strapi/strapi/admin';
 
 import {
   FieldAction,
   FieldInput,
   FieldLabel,
-} from "@strapi/design-system/Field";
-
-import { Stack } from "@strapi/design-system/Stack";
-import Refresh from "@strapi/icons/Refresh";
-import StrikeThrough from "@strapi/icons/StrikeThrough";
+  Stack
+} from "@strapi/design-system";
+import { Refresh, StrikeThrough } from "@strapi/icons";
 import styled from "styled-components";
 
 import cyrToLat from "./cyr-to-lat";
@@ -42,8 +40,10 @@ const Index = ({ name, value, intlLabel, attribute }) => {
   };
 
 
-  const { modifiedData, onChange } = useCMEditViewDataManager();
-  //const debouncedTargetFieldValue = useDebounce(modifiedData.title, 300);
+  const { form } = useContentManagerContext();
+  // Here 'initialData' and 'values' correspond to 'initialValues' and 'values'.
+  const { initialValues, values, onChange } = form;
+  //const debouncedTargetFieldValue = useDebounce(values.title, 300);
 
   let data_id;
   let data_title;
@@ -61,17 +61,17 @@ const Index = ({ name, value, intlLabel, attribute }) => {
   }
 
   // useEffect(() => {
-  //   if (Number(modifiedData.id)) {
+  //   if (Number(values.id)) {
   //     attribute.options?.kw
-  //       ? setDataId(slugify(attribute.options?.kw) + "-" + modifiedData.id)
-  //       : setDataId(modifiedData.id);
+  //       ? setDataId(slugify(attribute.options?.kw) + "-" + values.id)
+  //       : setDataId(values.id);
   //   }
-  // }, [modifiedData.updatedAt, modifiedData.id]);
+  // }, [values.updatedAt, values.id]);
 
-  if (Number(modifiedData.id)) {
+  if (Number(values.id)) {
     attribute.options?.kw
-      ? (data_id = slugify(attribute.options?.kw) + "-" + modifiedData.id)
-      : (data_id = modifiedData.id);
+      ? (data_id = slugify(attribute.options?.kw) + "-" + values.id)
+      : (data_id = values.id);
   }
 
   // console.log("data_id", data_id);
@@ -80,10 +80,10 @@ const Index = ({ name, value, intlLabel, attribute }) => {
     onChange({ target: { name, value: data_id } });
   };
 
-  if (modifiedData.title) {
+  if (values.title) {
     attribute.options?.kw
-      ? (data_title = slugify(attribute.options?.kw + "-" + modifiedData.title))
-      : (data_title = slugify(modifiedData.title));
+      ? (data_title = slugify(attribute.options?.kw + "-" + values.title))
+      : (data_title = slugify(values.title));
   }
   console.log("data_title", data_title);
   const generateSlug_by_Title = async () => {
@@ -97,21 +97,21 @@ const Index = ({ name, value, intlLabel, attribute }) => {
   }
   if (attribute.options?.pattern == "title") {
     useEffect(() => {
-      if (modifiedData.title) {
+      if (values.title) {
         generateSlug_by_Title();
       }
-    }, [modifiedData.title]);
+    }, [values.title]);
   } else if (attribute.options?.pattern == "id") {
     useEffect(() => {
-      if (modifiedData.id) {
+      if (values.id) {
         generateSlug_by_Id();
       }
-    }, [modifiedData.id]);
+    }, [values.id]);
   }
 
   const clearGeneratedSlug = () => {
     onChange({ target: { name, value: "" } });
-    // console.log("modifiedData", modifiedData);
+    // console.log("values", values);
     // console.log("attr: ", attribute);
   };
 
