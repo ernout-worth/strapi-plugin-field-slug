@@ -4,12 +4,10 @@ import {
 } from '@strapi/strapi/admin';
 
 import {
-  FieldAction,
-  FieldInput,
-  FieldLabel,
-  Stack
+  Field,
+  Flex
 } from "@strapi/design-system";
-import { Refresh, StrikeThrough } from "@strapi/icons";
+import { ArrowClockwise, StrikeThrough } from "@strapi/icons";
 import styled from "styled-components";
 
 import cyrToLat from "./cyr-to-lat";
@@ -116,10 +114,10 @@ const Index = ({ name, value, intlLabel, attribute }) => {
   };
 
   return (
-    <Stack spacing={1}>
-      <FieldLabel>{intlLabel?.defaultMessage}</FieldLabel>
+    <Flex spacing={1}>
+      <Field.Label>{intlLabel?.defaultMessage}</Field.Label>
 
-      <FieldInput
+      <Field.Input
         label="slug"
         name="slug"
         value={value || ""}
@@ -134,7 +132,7 @@ const Index = ({ name, value, intlLabel, attribute }) => {
           })
         }
         endAction={
-          <Stack horizontal spacing={2}>
+          <Flex horizontal spacing={2}>
             <FieldActionWrapper
               onClick={() => generateSlug_by_Title()}
               label="regenerate"
@@ -142,18 +140,18 @@ const Index = ({ name, value, intlLabel, attribute }) => {
               <StrikeThrough />
             </FieldActionWrapper>
             <FieldActionWrapper onClick={() => generateSlug_by_Datetime()}>
-              <Refresh />
+              <ArrowClockwise />
             </FieldActionWrapper>
-          </Stack>
+          </Flex>
         }
       />
-    </Stack>
+    </Flex>
   );
 };
 
 export default Index;
 
-export const FieldActionWrapper = styled(FieldAction)`
+export const FieldActionWrapper = styled(Field.Action)`
   svg {
     height: 1rem;
     width: 1rem;
