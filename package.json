@@ -16,7 +16,7 @@
   "peerDependencies": {
     "@strapi/strapi": "^5.0.0",
     "@strapi/design-system": "^2.0.0",
-    "@strapi/icons": "^2.0.0"
+    "@strapi/icons": "^2.0.0-rc.14"
   },
   "author": "Anastasiia Berest <anastasiiaberest@gmail.com> (XFR | xforeal)",
   "maintainers": [
